@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "114954620373",
+    "project_id": "uji-kom-tsa",
+    "storage_bucket": "uji-kom-tsa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:114954620373:android:4cd72d755125c41dd9815c",
+        "android_client_info": {
+          "package_name": "com.okifirsyah.uji_kom_tsa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "114954620373-m68dcq3mslv1tfd12hke3h3cu35igr62.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkuB2oNSL6fg2CuIF6AdfxvXp56bpzD4Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "114954620373-m68dcq3mslv1tfd12hke3h3cu35igr62.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
