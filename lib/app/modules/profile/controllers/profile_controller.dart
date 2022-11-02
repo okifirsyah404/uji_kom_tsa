@@ -5,35 +5,16 @@ import 'package:get/get.dart';
 
 class ProfileController extends GetxController {
   final User? user = FirebaseAuth.instance.currentUser;
-  CollectionReference users = FirebaseFirestore.instance.collection('users');
+  CollectionReference users = FirebaseFirestore.instance.collection('user');
 
-  late TextEditingController emailController;
-  late TextEditingController fullNameController;
-  late TextEditingController phoneNumberController;
+  Stream<DocumentSnapshot<Object?>> get userSnapshot =>
+      users.doc(user?.uid).snapshots();
 
-  @override
-  void onInit() {
-    emailController = TextEditingController();
-    fullNameController = TextEditingController();
-    phoneNumberController = TextEditingController();
-
-    super.onInit();
-  }
-
-  @override
-  void onReady() {
-    emailController.text = user?.email ?? "Email Tidak Ada";
-    fullNameController.text = user?.email ?? "Email Tidak Ada";
-
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    emailController.dispose();
-    fullNameController.dispose();
-    phoneNumberController.dispose();
-
-    super.onClose();
+  void getUserData() async {
+    try {
+      return users.doc(user?.uid).get().then((value) => value);
+    } catch (e) {
+      printError(info: e.toString());
+    }
   }
 }

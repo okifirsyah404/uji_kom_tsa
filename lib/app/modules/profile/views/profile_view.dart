@@ -9,56 +9,59 @@ import '../../global/widgets/text_field/password_text_field/password_text_field.
 import '../controllers/profile_controller.dart';
 
 class ProfileView extends GetView<ProfileController> {
-  const ProfileView({Key? key}) : super(key: key);
+  ProfileView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<DocumentSnapshot>(
-      stream: controller.users.doc(controller.user?.uid).snapshots(),
-      builder: (context, snapshot) {
+      stream: controller.userSnapshot,
+      builder: (_, snapshot) {
         if (snapshot.connectionState == ConnectionState.active) {
-          // controller.phoneNumberController.text = snapshot.data.
+          var output = snapshot.data;
 
           return Scaffold(
             appBar: AppBar(
               title: const Text('Profile'),
               centerTitle: true,
+              actions: [
+                IconButton(
+                  onPressed: () {
+                    Get.toNamed("/setting-profile");
+                  },
+                  icon: Icon(Icons.settings),
+                ),
+              ],
             ),
-            body: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      height: 100,
-                      width: 100,
-                      child: CircleAvatar(
-                        backgroundImage:
-                            NetworkImage("https://picsum.photos/100"),
+            body: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Center(
+                      child: SizedBox(
+                        height: 100,
+                        width: 100,
+                        child: CircleAvatar(
+                          backgroundImage:
+                              NetworkImage("https://picsum.photos/100"),
+                        ),
                       ),
                     ),
-                    RegularTextField(
-                      controller: controller.fullNameController,
-                      label: "Nama Langkap",
-                      suffixIcon: FaIcon(FontAwesomeIcons.user),
-                    ),
-                    SizedBox(height: 8),
-                    RegularTextField(
-                      controller: controller.emailController,
-                      label: "Email",
-                      suffixIcon: FaIcon(FontAwesomeIcons.envelope),
-                    ),
-                    SizedBox(height: 8),
-                    RegularTextField(
-                      controller: controller.phoneNumberController,
-                      label: "Telephone",
-                      suffixIcon: FaIcon(FontAwesomeIcons.phone),
-                      keyboardType: TextInputType.number,
-                    ),
-                    SizedBox(height: 16),
-                  ],
-                ),
+                  ),
+                  ListTile(
+                    title: Text("Nama"),
+                    subtitle: Text(output?["fullName"] ?? "null"),
+                  ),
+                  ListTile(
+                    title: Text("Email"),
+                    subtitle: Text(output?["email"] ?? "null"),
+                  ),
+                  ListTile(
+                    title: Text("Nomor Hanphone"),
+                    subtitle: Text(output?["userPhoneNumber"] ?? "null"),
+                  ),
+                ],
               ),
             ),
           );
@@ -70,48 +73,5 @@ class ProfileView extends GetView<ProfileController> {
         );
       },
     );
-
-    // return Scaffold(
-    //     appBar: AppBar(
-    //       title: const Text('Profile'),
-    //       centerTitle: true,
-    //     ),
-    //     body: Padding(
-    //       padding: const EdgeInsets.all(16.0),
-    //       child: Center(
-    //         child: Column(
-    //           mainAxisAlignment: MainAxisAlignment.start,
-    //           crossAxisAlignment: CrossAxisAlignment.center,
-    //           children: [
-    //             Container(
-    //               height: 100,
-    //               width: 100,
-    //               child: CircleAvatar(
-    //                 backgroundImage: NetworkImage("https://picsum.photos/100"),
-    //               ),
-    //             ),
-    //             RegularTextField(
-    //               controller: controller.fullNameController,
-    //               label: "Nama Langkap",
-    //               suffixIcon: FaIcon(FontAwesomeIcons.user),
-    //             ),
-    //             SizedBox(height: 8),
-    //             RegularTextField(
-    //               controller: controller.emailController,
-    //               label: "Email",
-    //               suffixIcon: FaIcon(FontAwesomeIcons.envelope),
-    //             ),
-    //             SizedBox(height: 8),
-    //             RegularTextField(
-    //               controller: controller.phoneNumberController,
-    //               label: "Telephone",
-    //               suffixIcon: FaIcon(FontAwesomeIcons.phone),
-    //               keyboardType: TextInputType.number,
-    //             ),
-    //             SizedBox(height: 16),
-    //           ],
-    //         ),
-    //       ),
-    //     ));
   }
 }

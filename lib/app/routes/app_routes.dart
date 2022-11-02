@@ -8,6 +8,7 @@ abstract class Routes {
   static const AUTH_SIGN_UP = _Paths.AUTH_SIGN_UP;
   static const GEO_LOCATION = _Paths.GEO_LOCATION;
   static const PROFILE = _Paths.PROFILE;
+  static const SETTING_PROFILE = _Paths.SETTING_PROFILE;
 }
 
 abstract class _Paths {
@@ -17,4 +18,5 @@ abstract class _Paths {
   static const AUTH_SIGN_UP = '/sign-up';
   static const GEO_LOCATION = '/geo-location';
   static const PROFILE = '/profile';
+  static const SETTING_PROFILE = '/setting-profile';
 }
